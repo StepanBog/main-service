@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: odp-service
+  liquibase:
+    enabled: true
+  datasource:
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      idleTimeout: 20000
+      connection-timeout: 30000
+      poolName: odpServiceJPAHikariCP
+      keepaliveTime: 60000
+      maxLifetime: 180000
+      connection-test-query: SELECT 1
+    driverClassName: org.postgresql.Driver
+    name: postgres-datasource
+    url: jdbc:postgresql://localhost:5432/odp-service?autoReconnect=true
+    username: postgres
+    password: root
+
+  jpa:
+    open-in-view: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    generate-ddl: false
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+        temp:
+          use_jdbc_metadata_defaults: false
+        use_sql_comments: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+grpc:
+  server:
+    port: 6565
+    enable-keep-alive: true
+    keepAliveTime: 10s
+    keepAliveTimeout: 5s
+    permit-keep-alive-without-calls: false
+  client:
+    odp-accounting-integration-service:
+      address: 'static://localhost:6562'
+      enableKeepAlive: true
+      keepAliveTime: 10s
+      keepAliveTimeout: 5s
+      keepAliveWithoutCalls: false
+      negotiationType: PLAINTEXT
+    odp-payment-integration-service:
+      address: 'static://localhost:6569'
+      enableKeepAlive: true
+      keepAliveTime: 10s
+      keepAliveTimeout: 5s
+      keepAliveWithoutCalls: false
+      negotiationType: PLAINTEXT
+    odp-notification-manager:
+      address: 'static://localhost:6559'
+      enableKeepAlive: true
+      keepAliveTime: 10s
+      keepAliveTimeout: 5s
+      keepAliveWithoutCalls: false
+      negotiationType: PLAINTEXT
+
+server:
+  port: 8085
