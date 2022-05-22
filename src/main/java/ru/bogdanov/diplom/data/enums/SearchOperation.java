@@ -1,0 +1,5 @@
+package ru.bogdanov.diplom.data.enums;
+
+public enum SearchOperation {
+    EQUALITY, NEGATION, GREATER_THAN, LOCALDATETIME_GREATHER_THAN, LOCALDATETIME_LESS_THAN, LESS_THAN, LIKE, STARTS_WITH, ENDS_WITH, CONTAINS;
+}

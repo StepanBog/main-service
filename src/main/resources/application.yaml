@@ -1,6 +1,6 @@
 spring:
   application:
-    name: odp-service
+    name: main-service
   liquibase:
     enabled: true
   datasource:
@@ -9,13 +9,13 @@ spring:
       maximum-pool-size: 10
       idleTimeout: 20000
       connection-timeout: 30000
-      poolName: odpServiceJPAHikariCP
+      poolName: mainServiceJPAHikariCP
       keepaliveTime: 60000
       maxLifetime: 180000
       connection-test-query: SELECT 1
     driverClassName: org.postgresql.Driver
     name: postgres-datasource
-    url: jdbc:postgresql://localhost:5432/odp-service?autoReconnect=true
+    url: jdbc:postgresql://localhost:5432/main-service?autoReconnect=true
     username: postgres
     password: root
 
@@ -48,28 +48,6 @@ grpc:
     keepAliveTime: 10s
     keepAliveTimeout: 5s
     permit-keep-alive-without-calls: false
-  client:
-    odp-accounting-integration-service:
-      address: 'static://localhost:6562'
-      enableKeepAlive: true
-      keepAliveTime: 10s
-      keepAliveTimeout: 5s
-      keepAliveWithoutCalls: false
-      negotiationType: PLAINTEXT
-    odp-payment-integration-service:
-      address: 'static://localhost:6569'
-      enableKeepAlive: true
-      keepAliveTime: 10s
-      keepAliveTimeout: 5s
-      keepAliveWithoutCalls: false
-      negotiationType: PLAINTEXT
-    odp-notification-manager:
-      address: 'static://localhost:6559'
-      enableKeepAlive: true
-      keepAliveTime: 10s
-      keepAliveTimeout: 5s
-      keepAliveWithoutCalls: false
-      negotiationType: PLAINTEXT
 
 server:
   port: 8085
