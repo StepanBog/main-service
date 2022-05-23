@@ -26,30 +26,22 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
     List<Transaction> findAllByStatus(TransactionStatus status, Sort sort);
 
     @Override
-    @EntityGraph(attributePaths = {"employee", "employee.requisites", "employee.position", "payments", "payments.position"})
+    @EntityGraph(attributePaths = {"employee", "employee.requisites"})
     List<Transaction> findAll(Specification<Transaction> specification);
 
     @Override
-    @EntityGraph(attributePaths = {"employee", "employee.requisites", "employee.position", "payments", "payments.position"})
+    @EntityGraph(attributePaths = {"employee", "employee.requisites"})
     Page<Transaction> findAll(Specification<Transaction> specification, Pageable pageable);
 
     @Override
-    @EntityGraph(attributePaths = {"employee", "employee.requisites", "employee.position", "payments", "payments.position"})
+    @EntityGraph(attributePaths = {"employee", "employee.requisites"})
     List<Transaction> findAll(Specification<Transaction> specification, Sort sort);
 
-    @EntityGraph(attributePaths = {"payments", "payments.position", "employee", "employee.requisites", "employee.position", "employee.position.payments", "employee.position.salaries"})
+    @EntityGraph(attributePaths = {"employee", "employee.requisites", "employee.salary"})
     @Query(value = "select p from Transaction p where p.id = :transactionId")
     Optional<Transaction> findOneFull(@Param("transactionId") UUID transactionId);
 
     @Modifying
     @Query(nativeQuery = true, value = "UPDATE transaction SET status = :status WHERE id = :id")
     void updateStatus(@Param("id") UUID id, @Param("status") String status);
-
-    Optional<Transaction> findBySignId(@NotNull final UUID signId);
-
-    @Modifying
-    @Query(nativeQuery = true, value = "UPDATE transaction SET document_id = :documentId WHERE id = :id")
-    void updateDocumentIdById(
-            @Param("id") UUID id,
-            @Param("documentId") UUID documentId);
 }

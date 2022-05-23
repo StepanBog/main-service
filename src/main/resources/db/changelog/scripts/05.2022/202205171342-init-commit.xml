@@ -7,8 +7,8 @@
 
     <changeSet id="202205171342" author="SBogdanov" failOnError="true"
                logicalFilePath="db/changelog/scripts/05.2022/liquibase_index.xml">
-        <comment>ODP-352: move stop service interval</comment>
-        <sqlFile path="sql/202205171342-move-stop-service-interval.sql"
+        <comment>init commit</comment>
+        <sqlFile path="sql/202205171342-init-commit.sql"
                  relativeToChangelogFile="true"/>
     </changeSet>
 

@@ -1,10 +1,13 @@
 package ru.bogdanov.diplom.grpc.service;
 
+import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.data.domain.Page;
+import ru.bogdanov.diplom.grpc.generated.ApproveRequest;
+import ru.bogdanov.diplom.grpc.generated.TransactionStatus;
 import ru.bogdanov.diplom.grpc.generated.service.transaction.*;
 import ru.bogdanov.diplom.manager.IPaymentTransactionManager;
 import ru.bogdanov.diplom.mapper.TransactionMapper;
@@ -29,7 +32,7 @@ public class GrpcTransactionService extends TransactionServiceGrpc.TransactionSe
     @Override
     public void pickUpPayment(PickUpPaymentRequest request, StreamObserver<ru.bogdanov.diplom.grpc.generated.Transaction> responseObserver) {
         ru.bogdanov.diplom.data.model.Transaction transactionEntity =
-                transactionManager.pickUpPayment(
+                transactionManager.createTransactionRequest(
                         UUID.fromString(request.getEmployeeId()),
                         request.getSum()
                 );
@@ -64,7 +67,7 @@ public class GrpcTransactionService extends TransactionServiceGrpc.TransactionSe
                         .stream()
                         .map(transaction -> transactionMapper.transform(
                                 transaction,
-                                transaction.getEmployee().getRequisites().getAccountNumber()
+                               null
                         ))
                         .collect(Collectors.toSet()))
                 .setTotalPages(transactions.getTotalPages())
@@ -73,10 +76,10 @@ public class GrpcTransactionService extends TransactionServiceGrpc.TransactionSe
         responseObserver.onCompleted();
     }
 
-/*    @Override
-    public void approveSign(ApproveSignDocuments request, StreamObserver<Empty> responseObserver) {
-        transactionManager.approveSign(request);
+    @Override
+    public void approveRequest(ApproveRequest request, StreamObserver<Empty> responseObserver) {
+        transactionManager.approveRequest(UUID.fromString(request.getTransactionId()));
         responseObserver.onNext(Empty.getDefaultInstance());
         responseObserver.onCompleted();
-    }*/
+    }
 }

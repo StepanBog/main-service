@@ -24,21 +24,25 @@ public class Salary extends AbstractEntity implements Serializable {
 
     /**
      * Средства доступные для вывода.
-     * Изменяется только работодателем
-     * Сумма в копейках!
+     * Сумма в копейках.
      */
     @Builder.Default
     private long availableCash = 0;
 
     /**
      * Средства, заработанный за месяц без учета досрочных вычетов.
-     * Изменяется только работодателем.
      */
     @Builder.Default
     private long earnedForMonth = 0;
 
     /**
-     * Период, за который заработаны средства
+     * Ставка
+     */
+    @Builder.Default
+    private long rate = 0;
+
+    /**
+     * Дата трудоустройства
      */
     private LocalDate period;
 

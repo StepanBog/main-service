@@ -59,26 +59,10 @@ public interface ITransactionService {
     Page<Transaction> findAll(@NotNull final SearchTransactionRequest searchRequest);
 
     /**
-     * Поиск транзакций по signId
-     *
-     * @param singId - id подписи
-     * @return найденная транзакция
-     */
-    Transaction findOneBySignId(@NotNull final UUID singId);
-
-    /**
      * Найти все транзакции по статусу
      *
      * @param status - статус транзакции
      * @return - пайденный список транзакций
      */
     List<Transaction> findAllByStatus(TransactionStatus status);
-
-    /**
-     * Обновить documentId у транзакции
-     *
-     * @param id         - идентификатор выплаты
-     * @param documentId - идентификатор сгенерированного документа для выплаты
-     */
-    void updateDocumentIdById(@NotNull final UUID id, @NotNull final UUID documentId);
 }

@@ -49,12 +49,10 @@ public class GrpcSalaryService extends SalaryServiceGrpc.SalaryServiceImplBase {
     @Override
     public void findByEmployeeId(FindSalaryByEmployeeRequest request, StreamObserver<SalaryResponse> responseObserver) {
         responseObserver.onNext(
-                SalaryResponse.newBuilder().addAllSalaries(
-                        salaryService.findAllByEmployeeId(
-                                UUID.fromString(request.getEmployeeId())).stream()
-                                .map(salaryMapper::transform)
-                                .collect(Collectors.toList())
-                ).build()
+                SalaryResponse.newBuilder().setSalary(salaryMapper.transform(
+                                salaryService.findByEmployeeId(
+                                        UUID.fromString(request.getEmployeeId()))))
+                        .build()
         );
         responseObserver.onCompleted();
     }

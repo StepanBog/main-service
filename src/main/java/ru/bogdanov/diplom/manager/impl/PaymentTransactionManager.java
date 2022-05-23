@@ -17,8 +17,6 @@ import ru.bogdanov.diplom.service.validator.TransactionValidator;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,7 +27,7 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class PaymentTransactionManager implements IPaymentTransactionManager {
-    
+
     private final ITransactionService transactionService;
     private final IEmployeeService employeeService;
     private final ISalaryService salaryService;
@@ -38,12 +36,10 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
 
 
     @Override
-    public Transaction pickUpPayment(@NotNull final UUID employeeId,
-                                     long sum) {
-      //  log.info("Pick up payment with sum - {}, for employeeId - {}", sum, employeeId);
+    public Transaction createTransactionRequest(@NotNull final UUID employeeId,
+                                                long sum) {
         Employee employee = employeeService.findOne(employeeId);
-        List<Salary> salaries = salaryService.findAllByEmployeeId(employeeId);
-     //   log.info("Start pickUpPayment foe employeeId - {}", employeeId);
+        Salary salary = salaryService.findByEmployeeId(employeeId);
 
         Transaction transaction = Transaction.builder()
                 .employee(employee)
@@ -53,45 +49,15 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
                 .totalSum(sum)
                 .build();
 
-        salaries.sort(Comparator.comparing(Salary::getPeriod));
-        //уменьшаемая сумма транзакции
-        long reducedTransactionSum = transaction.getTotalSum();
-        //оставщаяся сумма выплат транзакций
-        long remainingPaymentSum = reducedTransactionSum;
-
-        validate(employee, transaction,employeeService);
-
-        for (Salary salary : salaries) {
-            reducedTransactionSum -= salary.getAvailableCash();
-            /*if (reducedTransactionSum >= 0) {
-                payment.setSum(salary.getAvailableCash());
-            } else {
-                payment.setSum(remainingPaymentSum);
-            }*/
-
-            if (reducedTransactionSum <= 0) {
-                break;
-            }
-            remainingPaymentSum = reducedTransactionSum;
-        }
+        validate(employee, transaction, salary, transactionService);
 
         transaction.setEmployee(employee);
+        transaction.setStatus(TransactionStatus.AWAITING_CONFIRMATION);
         transaction = transactionService.create(transaction);
 
-       /* Map<String, Object> params = new HashMap<>();
-        params.put(ProcessConstants.TRANSACTION_ID_FIELD, transaction.getId().toString());
-        params.put(ProcessConstants.EMPLOYEE_ID_FIELD, employee.getId().toString());
-        params.put(ProcessConstants.EMPLOYER_ID_FIELD, employee.getEmployer().getId().toString());
-        params.put(ProcessConstants.EMPLOYER_INN_FIELD, employee.getEmployer().getRequisites().getInn());
-        params.put(ProcessConstants.BANK_ACCOUNT_NUMBER_FIELD, employee.getRequisites().getAccountNumber());
-        params.put(ProcessConstants.POSITION_ID_FIELD, employee.getPosition().getId().toString());
-        params.put(ProcessConstants.TRANSACTION_SUM_FIELD, sum);
-        params.put(ProcessConstants.STATUS_NAME_FIELD, TransactionStatus.NEW.name());
-        params.put(ProcessConstants.TRANSACTION_COMMISSION_FIELD, transaction.getCommission());
-        params.put(ProcessConstants.TRANSACTION_COMMISSION_PAYER_FIELD, transaction.getCommissionPayer());
-        params.put(ProcessConstants.EXTERNAL_POSITION_ID_FIELD, employee.getPosition().getExternalPositionId());*/
+        salary.setAvailableCash(salary.getAvailableCash() - transaction.getTotalSum());
+        salaryService.save(salary);
 
-        log.info("End pickUpPayment foe employeeId - {}", employeeId);
         return transaction;
     }
 
@@ -103,27 +69,30 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
      */
     private void validate(@NotNull final Employee employee,
                           @NotNull final Transaction transaction,
-                          @NotNull final IEmployeeService employeeService) {
+                          @NotNull final Salary salary,
+                          @NotNull final ITransactionService transactionService) {
         employeeValidator.validate(employee);
-        transactionValidator.validate(employee, transaction);
+        transactionValidator.validate(transaction, salary, transactionService);
     }
 
-   /* @Override
-    public void approveSign(ApproveSignDocuments request) {
-        try {
-            processExecutionService.handleReceiveAsyncMessage(
-                    request.getEntityId(),
-                    ProcessConstants.DOCUMENT_SIGNED_MESSAGE_REFERENCE,
-                    Map.of(
-                            ProcessConstants.SIGN_APPROVE_NOTIFICATION_ID_FIELD, request.getNotificationId(),
-                            ProcessConstants.TRANSACTION_SIGN_ID_FIELD, request.getSignId()
-                    )
-            );
-        } catch (RuntimeException e) {
-            log.error("Error approve sign for request - {}", request, e);
-            throw new ServiceException("Error approve sign", ErrorCode.SIGN_CREATION_ERROR);
-        }
-    }*/
+    @Override
+    public void approveRequest(@NotNull final UUID transactionId) {
+        Transaction transaction = transactionService.findOneFull(transactionId);
+        transaction.setStatus(TransactionStatus.PROCESSING);
+        // execute transaction
+        transaction.setStatus(TransactionStatus.SUCCESS);
+        transactionService.save(transaction);
+    }
+
+    @Override
+    public void declineRequest(UUID transactionId) {
+        Transaction transaction = transactionService.findOneFull(transactionId);
+        transaction.setStatus(TransactionStatus.DECLINE);
+        Salary salary = salaryService.findByEmployeeId(transaction.getEmployee().getId());
+        salary.setAvailableCash(salary.getAvailableCash() + transaction.getTotalSum());
+        salaryService.save(salary);
+        transactionService.save(transaction);
+    }
 
     @Override
     public void expired(@NotNull final Transaction transaction) {

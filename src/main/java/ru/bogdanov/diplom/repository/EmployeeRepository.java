@@ -28,34 +28,34 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID>, JpaSp
 
     long countEmployeesByEmployer(Employer employer);
 
-    @EntityGraph(attributePaths = {"employer", "requisites", "employeeHoldSum", "position", "position.salaries"})
+    @EntityGraph(attributePaths = {"employer", "requisites", "position", "position.salaries"})
     @Query(value = "select e from Employee e where e.employer.id = :employerId")
     List<Employee> findByEmployerId(@Param("employerId") UUID employerId);
 
     @Override
-    @EntityGraph(attributePaths = {"employer", "employer.requisites", "employer.tariffs", "requisites", "employeeHoldSum", "position"})
+    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "salary"})
     Optional<Employee> findById(UUID uuid);
 
     @Override
-    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "employeeHoldSum", "position.salaries",  "position"})
+    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "position.salaries", "position"})
     List<Employee> findAll(Specification<Employee> specification);
 
     @Override
-    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "employeeHoldSum", "position.salaries",  "position"})
+    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "position.salaries", "position"})
     Page<Employee> findAll(Specification<Employee> spec, Pageable pageable);
 
     @Override
-    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "employeeHoldSum", "position.salaries","position"})
+    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "position.salaries", "position"})
     List<Employee> findAll(@Nullable Specification<Employee> spec, Sort sort);
 
-    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "employeeHoldSum", "position"})
+    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "position"})
     @Query(value = "select e from Employee e where e.requisites.accountNumber = :accountNumber " +
             " AND e.employer.requisites.inn = :employerInn")
     Optional<Employee> findByEmployerInnAndAccountNumber(@Param("employerInn") String employerInn,
                                                          @Param("accountNumber") String accountNumber);
 
 
-    @EntityGraph(attributePaths = {"employer", "requisites", "employeeHoldSum", "position.salaries", "transactions", "transactions.payments", "position"})
+    @EntityGraph(attributePaths = {"employer", "requisites", "position.salaries", "transactions", "transactions.payments", "position"})
     @Query(value = "select e from Employee e where e.id = :employeeId")
     Optional<Employee> findOneFull(@Param("employeeId") UUID employeeId);
 

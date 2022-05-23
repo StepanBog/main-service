@@ -43,14 +43,6 @@ public class TransactionService implements ITransactionService {
                 );
     }
 
-    @Override
-    public Transaction findOneBySignId(@NotNull UUID id) {
-        return transactionRepository.findBySignId(id)
-                .orElseThrow(() -> new ServiceException(
-                        String.format("Transaction nof found by sign id - %s", id),
-                        ErrorCode.TRANSACTION_NOT_FOUND)
-                );
-    }
 
     @Override
     public List<Transaction> findAllByStatus(TransactionStatus transactionStatus) {
@@ -104,9 +96,4 @@ public class TransactionService implements ITransactionService {
         return new PageImpl(findPayments);
     }
 
-    @Override
-    @Transactional
-    public void updateDocumentIdById(@NotNull final UUID transactionId, @NotNull final UUID documentId) {
-        transactionRepository.updateDocumentIdById(transactionId, documentId);
-    }
 }

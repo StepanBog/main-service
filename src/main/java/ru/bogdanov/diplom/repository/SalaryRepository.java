@@ -20,11 +20,7 @@ import java.util.UUID;
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, UUID> {
 
-    @Query(nativeQuery = true, value = "SELECT s.* FROM salary s \n" +
-            "LEFT JOIN position p on p.id = s.position_id \n" +
-            "LEFT JOIN employee e on e.id = p.employee_id \n" +
-            "WHERE e.id = :employeeId")
-    List<Salary> findByEmployeeId(@Param("employeeId") UUID employeeId);
+    Salary findByEmployeeId(UUID employeeId);
 
     @Query(nativeQuery = true, value = "SELECT s.* FROM salary s \n" +
             "WHERE s.position_id = :positionId \n" +

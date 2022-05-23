@@ -21,12 +21,12 @@ public interface ISalaryService {
     Salary findOne(@NotNull final UUID id);
 
     /**
-     * Поиск счетаов по employee id
+     * Поиск счета по employee id
      *
      * @param employeeId - id работника
      * @return найденный счет
      */
-    List<Salary> findAllByEmployeeId(@NotNull final UUID employeeId);
+    Salary findByEmployeeId(@NotNull final UUID employeeId);
 
 
     /**

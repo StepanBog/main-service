@@ -17,15 +17,18 @@ public interface IPaymentTransactionManager {
      * @param employeeId id работника
      * @param sum        сумма выплаты
      */
-    Transaction pickUpPayment(@NotNull final UUID employeeId,
-                              @NotNull long sum);
+    Transaction createTransactionRequest(@NotNull final UUID employeeId,
+                                         @NotNull long sum);
 
-   /* *//**
-     * Подтвердить транзакцию выплаты
-     *
-     * @param request запрос для подтверждения
-     *//*
-    void approveSign(@NotNull ApproveSignDocuments request);*/
+     /**
+     * Подтвердить запрос выплаты
+     */
+    void approveRequest(@NotNull final UUID transactionId);
+
+    /**
+     * Отклонить запрос выплаты
+     */
+    void declineRequest(@NotNull final UUID transactionId);
 
     /**
      * Транзакция просрочена т.к. просрочена подпись и уведомление подтверждающее подпись

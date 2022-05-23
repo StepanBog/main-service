@@ -33,7 +33,7 @@ public class SalaryService implements ISalaryService {
     }
 
     @Override
-    public List<Salary> findAllByEmployeeId(@NotNull UUID employeeId) {
+    public Salary findByEmployeeId(@NotNull UUID employeeId) {
         return salaryRepository.findByEmployeeId(employeeId);
     }
 
