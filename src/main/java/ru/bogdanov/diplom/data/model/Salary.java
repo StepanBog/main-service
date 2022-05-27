@@ -44,18 +44,11 @@ public class Salary extends AbstractEntity implements Serializable {
     /**
      * Дата трудоустройства
      */
-    private LocalDate period;
+    private LocalDate date;
 
     /**
      * дата обновления информации
      */
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime salaryUpdateAt;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.REFRESH})
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
 }

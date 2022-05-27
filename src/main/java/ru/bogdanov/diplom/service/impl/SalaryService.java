@@ -5,8 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bogdanov.diplom.data.exception.ServiceException;
+import ru.bogdanov.diplom.data.model.Employee;
+import ru.bogdanov.diplom.data.model.Employer;
 import ru.bogdanov.diplom.data.model.Salary;
 import ru.bogdanov.diplom.grpc.generated.error.ErrorCode;
+import ru.bogdanov.diplom.repository.EmployeeRepository;
 import ru.bogdanov.diplom.repository.SalaryRepository;
 import ru.bogdanov.diplom.service.ISalaryService;
 
@@ -24,6 +27,7 @@ import java.util.UUID;
 public class SalaryService implements ISalaryService {
 
     private final SalaryRepository salaryRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public Salary findOne(@NotNull final UUID id) {
@@ -34,12 +38,8 @@ public class SalaryService implements ISalaryService {
 
     @Override
     public Salary findByEmployeeId(@NotNull UUID employeeId) {
-        return salaryRepository.findByEmployeeId(employeeId);
-    }
-
-    @Override
-    public List<Salary> findAllByPositionId(@NotNull UUID positionId) {
-        return salaryRepository.findByPositionId(positionId);
+        Employee employee = employeeRepository.findOneFull(employeeId).get();
+        return employee.getSalary();
     }
 
     @Override
@@ -51,6 +51,6 @@ public class SalaryService implements ISalaryService {
     @Override
     @Transactional
     public void deleteByPositionId(UUID positionId) {
-        salaryRepository.deleteByPositionId(positionId);
+        return;
     }
 }

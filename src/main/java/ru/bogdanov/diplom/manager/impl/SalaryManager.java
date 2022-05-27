@@ -52,11 +52,11 @@ public class SalaryManager implements ISalaryManager {
             isCheckedByListList.add(isCheckedByList);
 
             if (!CollectionUtils.isEmpty(salaries)) {
-                builder.setPeriod(timestampMapper.mapToProto(salaries.get(0).getPeriod())) //TODO уточнить требования к полю. Резлизовать задачу по доработке
+                builder.setdate(timestampMapper.mapToProto(salaries.get(0).getdate())) //TODO уточнить требования к полю. Резлизовать задачу по доработке
                         .setEarnedForMonth(0) //TODO уточнить требования к полю. Резлизовать задачу по доработке
                         .setUpdatedAt(timestampMapper.mapToProto(salaries.get(0).getSalaryUpdateAt()));
             } else {
-                builder.setPeriod(timestampMapper.mapToProto(LocalDate.now().atStartOfDay().toLocalDate()))
+                builder.setdate(timestampMapper.mapToProto(LocalDate.now().atStartOfDay().toLocalDate()))
                         .setEarnedForMonth(0);
             }
 
@@ -87,9 +87,9 @@ public class SalaryManager implements ISalaryManager {
                 .setEarnedForMonth(builderList.stream()
                         .map(Salary.Builder::getEarnedForMonth)
                         .reduce(0L, Long::sum))
-                .setPeriod(builderList.stream()
-                        .map(Salary.Builder::getPeriod)
-                        .reduce(builderList.get(0).getPeriod(), (a, b) -> timestampMapper.mapToLocalDate(a).isAfter(timestampMapper.mapToLocalDate(b)) ? a : b))
+                .setdate(builderList.stream()
+                        .map(Salary.Builder::getdate)
+                        .reduce(builderList.get(0).getdate(), (a, b) -> timestampMapper.mapToLocalDate(a).isAfter(timestampMapper.mapToLocalDate(b)) ? a : b))
                 .setServiceAvailable(!isHoliday
                         && !nowInStopIntervalList.stream().reduce(true, (x, y) -> x && y)
                         && !isCheckedByListList.stream().reduce(true, (x, y) -> !x && !y));

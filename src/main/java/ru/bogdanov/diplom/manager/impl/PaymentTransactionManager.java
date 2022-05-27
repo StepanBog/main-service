@@ -39,7 +39,7 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
     public Transaction createTransactionRequest(@NotNull final UUID employeeId,
                                                 long sum) {
         Employee employee = employeeService.findOne(employeeId);
-        Salary salary = salaryService.findByEmployeeId(employeeId);
+        Salary salary = employee.getSalary();
 
         Transaction transaction = Transaction.builder()
                 .employee(employee)
@@ -88,7 +88,7 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
     public void declineRequest(UUID transactionId) {
         Transaction transaction = transactionService.findOneFull(transactionId);
         transaction.setStatus(TransactionStatus.DECLINE);
-        Salary salary = salaryService.findByEmployeeId(transaction.getEmployee().getId());
+        Salary salary = transaction.getEmployee().getSalary();
         salary.setAvailableCash(salary.getAvailableCash() + transaction.getTotalSum());
         salaryService.save(salary);
         transactionService.save(transaction);

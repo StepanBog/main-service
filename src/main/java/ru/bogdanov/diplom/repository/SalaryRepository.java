@@ -19,21 +19,11 @@ import java.util.UUID;
  */
 @Repository
 public interface SalaryRepository extends JpaRepository<Salary, UUID> {
+    @Query(nativeQuery = true, value = "select s from salary s where s.id = (select e.salary_id from employee e where e.id = :employeeId)")
+    Salary findByEmployeeId(@Param("employeeId") UUID employeeId);
 
-    Salary findByEmployeeId(UUID employeeId);
-
-    @Query(nativeQuery = true, value = "SELECT s.* FROM salary s \n" +
-            "WHERE s.position_id = :positionId \n" +
-            "ORDER BY s.period DESC")
-    List<Salary> findByPositionId(@Param("positionId") UUID positionId);
-
-    @EntityGraph(attributePaths = {"position"})
     @Query(value = "select s from Salary s where s.id = :id")
     Optional<Salary> findByIdFull(@Param("id") UUID id);
-
-    @Modifying
-    @Query(nativeQuery = true, value = "DELETE FROM salary WHERE position_id = :positionId")
-    void deleteByPositionId(@Param("positionId") UUID positionId);
 
     @Override
     @EntityGraph(attributePaths = {"position"})

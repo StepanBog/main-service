@@ -11,5 +11,17 @@
         <sqlFile path="sql/202205171342-init-commit.sql"
                  relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet id="202205171341" author="SBogdanov" failOnError="true"
+               logicalFilePath="db/changelog/scripts/05.2022/liquibase_index.xml">
+        <comment>init commit</comment>
+        <sqlFile path="sql/20220526-fix.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet id="202205171340" author="SBogdanov" failOnError="true"
+               logicalFilePath="db/changelog/scripts/05.2022/liquibase_index.xml">
+        <comment>init commit</comment>
+        <sqlFile path="sql/data.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>

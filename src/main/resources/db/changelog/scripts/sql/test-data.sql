@@ -95,32 +95,32 @@ VALUES ('98b43195-283e-4e38-ad31-008cde4a4b1e', false, '2022-01-13 03:35:05.4401
 
 
 INSERT INTO public.salary (id, available_cash, salary_update_at, created_at, updated_at, rate,
-                           earned_for_month, position_id, period)
+                           earned_for_month, position_id, date)
 VALUES ('77fc3325-9181-45e0-9590-ea736ec8ea25', 200, '2022-01-01 00:00:00.443000', '2022-01-01 00:00:00.443000',
         '2022-01-01 00:00:00.443000', null, 200, '02d62eb6-17e9-4274-b363-37fc59dc0567',
         '2022-01-01 00:00:00.443000');
 INSERT INTO public.salary (id, available_cash, salary_update_at, created_at, updated_at, rate,
-                           earned_for_month, position_id, period)
+                           earned_for_month, position_id, date)
 VALUES ('36b463f7-3078-4165-89eb-2f926fc5e64b', 5000, '2022-01-01 00:00:00.443000', '2022-01-01 00:00:00.443000',
         '2022-01-01 00:00:00.443000', null, 5000, '15e19f9b-cd43-4637-8684-d81ec8a4fa8d',
         '2022-01-01 00:00:00.443000');
 INSERT INTO public.salary (id, available_cash, salary_update_at, created_at, updated_at, rate,
-                           earned_for_month, position_id, period)
+                           earned_for_month, position_id, date)
 VALUES ('473e4dff-6002-47d3-b176-1b4c219a78d5', 10000, '2022-01-04 00:00:00.443000', '2022-01-01 00:00:00.443000',
         '2022-01-01 00:00:00.443000', null, 10000, '3cfe5e70-5bd9-4a2b-a918-8d3cfd7fb986',
         '2022-01-01 00:00:00.443000');
 INSERT INTO public.salary (id, available_cash, salary_update_at, created_at, updated_at, rate,
-                           earned_for_month, position_id, period)
+                           earned_for_month, position_id, date)
 VALUES ('4f961161-6cf2-42fb-9087-1bd2296241ee', 1000, '2021-12-01 00:00:00.443000', '2021-12-01 00:00:00.443000',
         '2021-12-01 00:00:00.443000', null, 1000, '65d661bc-773b-486b-b2d1-619ade8170f6',
         '2021-12-01 00:00:00.443000');
 INSERT INTO public.salary (id, available_cash, salary_update_at, created_at, updated_at, rate,
-                           earned_for_month, position_id, period)
+                           earned_for_month, position_id, date)
 VALUES ('6e7c874a-32cd-42f6-849d-20b95cfecaaf', 1000, '2022-01-02 00:00:00.443000', '2022-01-01 00:00:00.443000',
         '2022-01-01 00:00:00.443000', null, 988, '65d661bc-773b-486b-b2d1-619ade8170f6',
         '2022-01-01 00:00:00.443000');
 INSERT INTO public.salary (id, available_cash, salary_update_at, created_at, updated_at, rate,
-                           earned_for_month, position_id, period)
+                           earned_for_month, position_id, date)
 VALUES ('0dce06b3-a860-4f20-90c2-642694e2b723', 1000, '2022-01-03 00:00:00.443000', '2022-01-01 00:00:00.443000',
         '2022-01-01 00:00:00.443000', null, 1000, 'cfb5e35f-dd3e-4c0b-af3f-18a71c947b92',
         '2022-01-01 00:00:00.443000');
@@ -166,25 +166,25 @@ VALUES ('98553250-0485-4cae-94ce-e96a2863c883', '9eb70d0b-9f40-4b27-a84e-a933831
 
 
 INSERT INTO public.payment (id, sum, date, processed, created_at, updated_at, commission, type, description,
-                            transaction_id, position_id, period, vedomost_id)
+                            transaction_id, position_id, date, vedomost_id)
 VALUES ('ef35477c-382b-45fe-b258-a13da91aa5ff', 1000, '2021-12-06 02:26:28.630000', false, '2021-12-06 02:26:28.630000',
         '2021-12-06 02:26:28.630000', null, 'ODP_PAYMENT', 'выплата осуществленная сервисом odp',
         'ef35477c-382b-45fe-b258-a13da91aa5ff', '3cfe5e70-5bd9-4a2b-a918-8d3cfd7fb986', '2022-01-12 01:47:10.549869',
         null);
 INSERT INTO public.payment (id, sum, date, processed, created_at, updated_at, commission, type, description,
-                            transaction_id, position_id, period, vedomost_id)
+                            transaction_id, position_id, date, vedomost_id)
 VALUES ('bcf9779d-0f29-4410-852c-248056a4b992', 4000, '2021-12-04 04:26:28.630000', true, '2021-12-04 04:26:28.630000',
         '2021-12-04 04:26:28.630000', null, 'ODP_PAYMENT', 'выплата осуществленная сервисом odp',
         '2a4bc043-42ea-4279-858a-e702a43c91dd', '02d62eb6-17e9-4274-b363-37fc59dc0567', '2022-01-12 01:47:10.584179',
         null);
 INSERT INTO public.payment (id, sum, date, processed, created_at, updated_at, commission, type, description,
-                            transaction_id, position_id, period, vedomost_id)
+                            transaction_id, position_id, date, vedomost_id)
 VALUES ('497af915-b3d0-420c-ab58-b1018161e134', 4000, '2021-12-02 06:26:28.630000', true, '2021-12-02 06:26:28.630000',
         '2021-12-02 06:26:28.630000', null, 'ODP_PAYMENT', 'выплата осуществленная сервисом odp',
         '5e8cd4f0-d15c-4232-9577-29be1bd544f1', '65d661bc-773b-486b-b2d1-619ade8170f6', '2022-01-12 01:47:10.599387',
         'f5c70056-7d86-4486-b215-838c083ad42a');
 INSERT INTO public.payment (id, sum, date, processed, created_at, updated_at, commission, type, description,
-                            transaction_id, position_id, period, vedomost_id)
+                            transaction_id, position_id, date, vedomost_id)
 VALUES ('299b1823-5e11-49f9-af08-29a54ecef1b2', 700, '2021-10-06 04:21:15.009000', false, '2021-10-06 01:21:09.519463',
         '2021-10-06 01:21:09.519463', null, 'ODP_PAYMENT', 'выплата осуществленная сервисом odp',
         '675445a4-2392-482f-a152-baa477d14777', '15e19f9b-cd43-4637-8684-d81ec8a4fa8d', '2022-01-12 01:47:10.568668',

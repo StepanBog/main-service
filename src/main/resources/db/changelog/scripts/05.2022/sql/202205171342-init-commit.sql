@@ -94,7 +94,7 @@ create table salary
     updated_at       timestamp default now() not null,
     rate             bigint default 0,
     earned_for_month bigint    default 0,
-    period           timestamp default now() not null
+    date           timestamp default now() not null
 );
 
 comment on table salary is 'Таблица хранящая данные о счете работника';
@@ -105,7 +105,7 @@ comment on column salary.created_at is 'Дата создания';
 comment on column salary.updated_at is 'Дата обновления';
 comment on column salary.rate is 'Ставка сотрудника';
 comment on column salary.earned_for_month is 'Средства, заработанный за месяц без учета досрочных вычетов. Изменяется только работодателем.';
-comment on column salary.period is 'Дата трудоустройства';
+comment on column salary.date is 'Дата трудоустройства';
 
 -- auto-generated definition
 create table transaction
@@ -136,7 +136,7 @@ alter table employee
                 references employer,
     add column salary_id   uuid                    not null
             constraint employee_salary_id_fk
-                references employer,
+                references salary,
     add column requisites_id uuid                    not null
             constraint employee_requisites_id_fk
                 references requisites;

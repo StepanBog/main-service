@@ -13,16 +13,20 @@ public interface SalaryMapper {
 
     @Mapping(target = "availableCash", source = "availableCash", defaultValue = "0L")
     @Mapping(target = "earnedForMonth", source = "earnedForMonth", defaultValue = "0L")
+    @Mapping(target = "date",source = "period")
     Salary transformToEntity(ru.bogdanov.diplom.grpc.generated.Salary salary);
 
     @Mapping(target = "availableCash", source = "availableCash", defaultValue = "0L")
     @Mapping(target = "earnedForMonth", source = "earnedForMonth", defaultValue = "0L")
+    @Mapping(target = "period",source = "date")
+
     @BeanMapping(nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     ru.bogdanov.diplom.grpc.generated.Salary transform(Salary salary);
 
     @Named("transformFullSalary")
     @Mapping(target = "earnedForMonth", source = "earnedForMonth", defaultValue = "0L")
     @Mapping(target = "availableCash", source = "availableCash", defaultValue = "0L")
+    @Mapping(target = "period",source = "date")
     @BeanMapping(nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     ru.bogdanov.diplom.grpc.generated.Salary transformFull(Salary salary);
 

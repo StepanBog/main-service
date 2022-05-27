@@ -28,15 +28,6 @@ public interface ISalaryService {
      */
     Salary findByEmployeeId(@NotNull final UUID employeeId);
 
-
-    /**
-     * Поиск счетаов по position id
-     *
-     * @param positionId - id работника
-     * @return найденный счет
-     */
-    List<Salary> findAllByPositionId(@NotNull UUID positionId);
-
     /**
      * Сохранение счета работодателя
      */

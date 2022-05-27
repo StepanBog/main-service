@@ -55,17 +55,6 @@ public class Transaction extends AbstractEntity implements Serializable {
     private ApproveStatus approveStatus = ApproveStatus.TO_APPROVE;
 
     /**
-     * Текст ошибки
-     */
-    private String errorMessage;
-
-    /**
-     * Код ошибки
-     */
-    @Enumerated(EnumType.STRING)
-    private ErrorCode errorCode;
-
-    /**
      * Работник
      */
     @ToString.Exclude
