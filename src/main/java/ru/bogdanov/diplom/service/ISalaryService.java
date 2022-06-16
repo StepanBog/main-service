@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author VKozlov
+ * @author SBogdanov
  * Сервис для работы со счетом работника
  */
 public interface ISalaryService {

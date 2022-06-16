@@ -19,16 +19,15 @@ import java.util.UUID;
 @Repository
 public interface EmployerRepository extends JpaRepository<Employer, UUID>, JpaSpecificationExecutor<Employer> {
 
-    @EntityGraph(attributePaths = {"tariffs"})
     @Query(value = "select e from Employer e where e.requisites.inn = :employerInn")
     Optional<Employer> findByInn(@Param("employerInn") String inn);
 
-    @EntityGraph(attributePaths = {"requisites", "tariffs", "contacts"})
+    @EntityGraph(attributePaths = {"requisites",})
     @Query(value = "select e from Employer e where e.requisites.inn = :employerInn")
     Optional<Employer> findByInnFull(@Param("employerInn") String inn);
 
     @Override
-    @EntityGraph(attributePaths = {"requisites", "tariffs", "contacts"})
+    @EntityGraph(attributePaths = {"requisites", "contacts"})
     Optional<Employer> findById(UUID employerId);
 
 }

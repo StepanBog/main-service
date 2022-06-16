@@ -22,11 +22,13 @@ public interface EmployeeMapper {
 
     @Mapping(target = "status", source = "status")
     @Mapping(target = "employer.id", source = "employer.id", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+    @Mapping(target = "requisites",source = "requisites")
+    @Mapping(target = "salary",source = "salary")
     Employee transformToEntity(ru.bogdanov.diplom.grpc.generated.Employee employee);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "employer", ignore = true)
-    @Mapping(target = "salary", ignore = true)
+    @Mapping(target = "salary.rate", source = "employee.salary.rate")
     @Mapping(target = "transactions", ignore = true)
     Employee update(@MappingTarget Employee target, Employee employee);
 

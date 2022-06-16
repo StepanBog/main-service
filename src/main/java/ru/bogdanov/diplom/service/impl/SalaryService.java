@@ -14,11 +14,12 @@ import ru.bogdanov.diplom.repository.SalaryRepository;
 import ru.bogdanov.diplom.service.ISalaryService;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 /**
- * @author VKozlov
+ * @author SBogdanov
  * Сервис для работы с выплатами работнику
  */
 @Slf4j
@@ -45,6 +46,7 @@ public class SalaryService implements ISalaryService {
     @Override
     @Transactional
     public Salary save(@NotNull final Salary salary) {
+        salary.setDate(LocalDate.now());
         return salaryRepository.save(salary);
     }
 

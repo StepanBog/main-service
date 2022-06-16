@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author VKozlov
+ * @author SBogdanov
  */
 @Slf4j
 @Service
@@ -34,6 +34,7 @@ public class EmployerService implements IEmployerService {
     @Override
     @Transactional
     public Employer save(@NotNull Employer employer) {
+        employer.getContacts().forEach(contact -> contact.setEmployer(employer));
         return employerRepository.save(employer);
     }
 

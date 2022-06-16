@@ -21,20 +21,15 @@ public interface EmployerMapper {
     @Mapping(target = "requisites", ignore = true)
     ru.bogdanov.diplom.grpc.generated.Employer transform(Employer employer);
 
-  //  @Mapping(target = "tariffsList", ignore = true)
     ru.bogdanov.diplom.grpc.generated.Employer transformWithRequisites(Employer employer);
 
-  //  @Mapping(target = "tariffsList", source = "tariffs")
-  //  @Mapping(target = "budgetOrg", source = "budgetOrganization")
-//   @Mapping(target = "contactsList", source = "contacts")
+    @Mapping(target = "contactsList", source = "contacts")
     ru.bogdanov.diplom.grpc.generated.Employer transformFull(Employer employer);
 
-  //  @Mapping(target = "tariffs", source = "tariffsList")
- //   @Mapping(target = "contacts", source = "contactsList")
+    @Mapping(target = "contacts", source = "contactsList")
     Employer transform(ru.bogdanov.diplom.grpc.generated.Employer employer);
 
     @Mapping(target = "id", ignore = true)
-   // @Mapping(target = "requisites", ignore = true)
-  //  @Mapping(target = "tariffs", source = "tariffsList")
+    @Mapping(target = "requisites", ignore = true)
     Employer update(@MappingTarget Employer target, ru.bogdanov.diplom.grpc.generated.Employer employee);
 }

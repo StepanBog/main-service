@@ -54,10 +54,10 @@ public class GrpcEmployerService extends EmployerServiceGrpc.EmployerServiceImpl
 
     @Override
     public void findOne(OneEmployerRequest request, StreamObserver<Employer> responseObserver) {
-        UUID employeeId = UUID.fromString(request.getEmployerId());
+        UUID employerId = UUID.fromString(request.getEmployerId());
         responseObserver.onNext(
                 employerMapper.transformFull(
-                        employerService.findOne(employeeId))
+                        employerService.findOne(employerId))
         );
         responseObserver.onCompleted();
     }

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 /**
  * Валидатор для транзакции
  *
- * @author VKozlov
+ * @author SBogdanov
  */
 @Component
 @RequiredArgsConstructor

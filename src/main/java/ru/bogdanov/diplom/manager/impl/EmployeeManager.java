@@ -11,6 +11,8 @@ import ru.bogdanov.diplom.mapper.EmployeeMapper;
 import ru.bogdanov.diplom.service.IEmployeeService;
 import ru.bogdanov.diplom.service.IEmployerService;
 
+import java.time.LocalDate;
+
 /**
  * @author SBogdanov
  * Менеджер для работы с работником
@@ -30,7 +32,6 @@ public class EmployeeManager implements IEmployeeManager {
 
         try {
             Employee findEmployee = employeeService.findOne(
-                    request.getEmployer().getRequisites().getInn(),
                     request.getRequisites().getAccountNumber()
             );
             result =
@@ -41,11 +42,9 @@ public class EmployeeManager implements IEmployeeManager {
             return result;
         } catch (ServiceException e) {
 
-           /* log.info("Method create. {}, save new employee", e.getMessage());
-            Employee employee = employeeMapper.transformToEntity(request);*/
-            request.setEmployer(employerService.findOneByInnFull(request.getEmployer().getRequisites().getInn()));
+            request.setEmployer(employerService.findOne(request.getEmployer().getId()));
             request.setStatus(EmployeeStatus.NEW_EMPLOYEE);
-
+            request.getSalary().setDate(LocalDate.now());
             result = employeeService.save(request);
             return result;
         }

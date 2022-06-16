@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author VKozlov
+ * @author SBogdanov
  */
 @Slf4j
 @Service
@@ -71,11 +71,10 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Employee findOne(@NotNull String employeeInn, @NotNull String accountNumber) {
-        return employeeRepository.findByEmployerInnAndAccountNumber(employeeInn, accountNumber)
+    public Employee findOne(@NotNull String accountNumber) {
+        return employeeRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new ServiceException(
-                                String.format("Employee nof found by employeeInn - %s, and accountNumber %s",
-                                        employeeInn,
+                                String.format("Employee nof found by accountNumber %s",
                                         accountNumber),
                                 ErrorCode.EMPLOYEE_NOT_FOUND
                         )

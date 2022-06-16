@@ -1,6 +1,7 @@
 package ru.bogdanov.diplom.manager;
 
 import ru.bogdanov.diplom.data.model.Transaction;
+import ru.bogdanov.diplom.grpc.generated.TransactionStatus;
 
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -36,4 +37,10 @@ public interface IPaymentTransactionManager {
      * @param transaction сущность транзакции
      */
     void expired(@NotNull final Transaction transaction);
+
+    /**
+     * Транзакция отозвана
+
+     */
+    void withdrawn(@NotNull final UUID transactionId, TransactionStatus status);
 }

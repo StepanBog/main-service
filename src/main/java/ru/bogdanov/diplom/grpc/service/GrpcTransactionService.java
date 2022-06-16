@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.data.domain.Page;
 import ru.bogdanov.diplom.grpc.generated.ApproveRequest;
+import ru.bogdanov.diplom.grpc.generated.DeclineRequest;
+import ru.bogdanov.diplom.grpc.generated.Transaction;
 import ru.bogdanov.diplom.grpc.generated.TransactionStatus;
 import ru.bogdanov.diplom.grpc.generated.service.transaction.*;
 import ru.bogdanov.diplom.manager.IPaymentTransactionManager;
@@ -30,7 +32,7 @@ public class GrpcTransactionService extends TransactionServiceGrpc.TransactionSe
     private final TransactionMapper transactionMapper;
 
     @Override
-    public void pickUpPayment(PickUpPaymentRequest request, StreamObserver<ru.bogdanov.diplom.grpc.generated.Transaction> responseObserver) {
+    public void createRequest(CreatePaymentRequest request, StreamObserver<ru.bogdanov.diplom.grpc.generated.Transaction> responseObserver) {
         ru.bogdanov.diplom.data.model.Transaction transactionEntity =
                 transactionManager.createTransactionRequest(
                         UUID.fromString(request.getEmployeeId()),
@@ -79,6 +81,20 @@ public class GrpcTransactionService extends TransactionServiceGrpc.TransactionSe
     @Override
     public void approveRequest(ApproveRequest request, StreamObserver<Empty> responseObserver) {
         transactionManager.approveRequest(UUID.fromString(request.getTransactionId()));
+        responseObserver.onNext(Empty.getDefaultInstance());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void declineRequest(DeclineRequest request, StreamObserver<Empty> responseObserver) {
+        transactionManager.declineRequest(UUID.fromString(request.getTransactionId()));
+        responseObserver.onNext(Empty.getDefaultInstance());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void update(UpdateRequest request, StreamObserver<Empty> responseObserver) {
+        transactionManager.withdrawn(UUID.fromString(request.getTransactionId()),request.getStatus());
         responseObserver.onNext(Empty.getDefaultInstance());
         responseObserver.onCompleted();
     }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.contact</OriginalElement>
+  <nodes>
+    <node x="0.0" y="1277.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.databasechangeloglock</node>
+    <node x="155.0964912280702" y="0.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.requisites</node>
+    <node x="589.5" y="536.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employer</node>
+    <node x="135.0" y="1023.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.transaction</node>
+    <node x="10.5" y="503.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.salary</node>
+    <node x="629.5" y="764.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.contact</node>
+    <node x="1021.5" y="0.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.databasechangelog</node>
+    <node x="104.5" y="764.0">3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employee</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employee" target="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.salary" relationship="REFERENCES">
+      <point x="0.0" y="-104.5" />
+      <point x="0.0" y="104.5" />
+    </edge>
+    <edge source="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employee" target="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employer" relationship="REFERENCES">
+      <point x="123.66666666666669" y="-104.5" />
+      <point x="413.6666666666667" y="738.0" />
+      <point x="783.0" y="738.0" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.contact" target="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employer" relationship="REFERENCES">
+      <point x="0.0" y="-104.5" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employer" target="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.requisites" relationship="REFERENCES">
+      <point x="0.0" y="-71.5" />
+      <point x="783.0" y="477.0" />
+      <point x="401.0964912280702" y="477.0" />
+      <point x="0.0" y="225.5" />
+    </edge>
+    <edge source="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employee" target="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.requisites" relationship="REFERENCES">
+      <point x="-123.66666666666669" y="-104.5" />
+      <point x="166.33333333333331" y="738.0" />
+      <point x="0.0" y="738.0" />
+      <point x="0.0" y="477.0" />
+      <point x="401.0964912280702" y="477.0" />
+      <point x="0.0" y="225.5" />
+    </edge>
+    <edge source="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.transaction" target="3b52a096-70c9-43cd-9a42-56eb0c2cd989.TABLE:main-service.public.employee" relationship="REFERENCES">
+      <point x="0.0" y="-104.5" />
+      <point x="0.0" y="104.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.9619887165021157" showDependencies="false" x="483.1096777005424" y="801.7239373311529" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

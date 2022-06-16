@@ -13,13 +13,11 @@ import java.util.Set;
  * Сущность для хранения данных о работнике
  */
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString
 public class Employee extends AbstractEntity implements Serializable {
 
     /**

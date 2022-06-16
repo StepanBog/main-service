@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * @author VKozlov
+ * @author SBogdanov
  * Сервис для работы с работниками
  */
 public interface IEmployeeService {
@@ -54,12 +54,10 @@ public interface IEmployeeService {
     /**
      * Поиск сотрудника по лоигну и id работадателя
      *
-     * @param employeeInn   inn работадателя
      * @param accountNumber счет работника
      * @return найденный сотрудник
      */
-    Employee findOne(@NotNull final String employeeInn,
-                     @NotNull final String accountNumber);
+    Employee findOne(@NotNull final String accountNumber);
 
     /**
      * Получение количества работников со определенным статусом у конкретного работодателя

@@ -52,7 +52,7 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
         validate(employee, transaction, salary, transactionService);
 
         transaction.setEmployee(employee);
-        transaction.setStatus(TransactionStatus.AWAITING_CONFIRMATION);
+        transaction.setStatus(TransactionStatus.AWAITING_CONFORMATION);
         transaction = transactionService.create(transaction);
 
         salary.setAvailableCash(salary.getAvailableCash() - transaction.getTotalSum());
@@ -78,9 +78,8 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
     @Override
     public void approveRequest(@NotNull final UUID transactionId) {
         Transaction transaction = transactionService.findOneFull(transactionId);
-        transaction.setStatus(TransactionStatus.PROCESSING);
         // execute transaction
-        transaction.setStatus(TransactionStatus.SUCCESS);
+        transaction.setStatus(TransactionStatus.CONFIRMED);
         transactionService.save(transaction);
     }
 
@@ -97,5 +96,12 @@ public class PaymentTransactionManager implements IPaymentTransactionManager {
     @Override
     public void expired(@NotNull final Transaction transaction) {
         transactionService.updateStatus(transaction.getId(), TransactionStatus.TRANSACTION_EXPIRED);
+    }
+
+    @Override
+    public void withdrawn(UUID transactionId, TransactionStatus status) {
+        Transaction transaction = transactionService.findOneFull(transactionId);
+        transaction.setStatus(status);
+        transactionService.save(transaction);
     }
 }

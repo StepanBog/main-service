@@ -48,11 +48,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID>, JpaSp
     @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites", "salary"})
     List<Employee> findAll(@Nullable Specification<Employee> spec, Sort sort);
 
-    @EntityGraph(attributePaths = {"employer", "employer.requisites", "requisites"})
-    @Query(value = "select e from Employee e where e.requisites.accountNumber = :accountNumber " +
-            " AND e.employer.requisites.inn = :employerInn")
-    Optional<Employee> findByEmployerInnAndAccountNumber(@Param("employerInn") String employerInn,
-                                                         @Param("accountNumber") String accountNumber);
+    @EntityGraph(attributePaths = {"requisites"})
+    @Query(value = "select e from Employee e where e.requisites.accountNumber = :accountNumber ")
+    Optional<Employee> findByAccountNumber(@Param("accountNumber") String accountNumber);
 
 
     @EntityGraph(attributePaths = {"employer", "requisites", "salary", "transactions"})

@@ -1,11 +1,13 @@
 package ru.bogdanov.diplom.grpc.service;
 
+import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.data.domain.Page;
 import ru.bogdanov.diplom.grpc.generated.Employee;
+import ru.bogdanov.diplom.grpc.generated.EmployeeStatus;
 import ru.bogdanov.diplom.grpc.generated.Employer;
 import ru.bogdanov.diplom.grpc.generated.service.employee.*;
 import ru.bogdanov.diplom.manager.IEmployeeManager;
@@ -38,7 +40,9 @@ public class GrpcEmployeeService extends EmployeeServiceGrpc.EmployeeServiceImpl
 
     @Override
     public void update(Employee request, StreamObserver<Employee> responseObserver) {
-        responseObserver.onNext(employeeMapper.transform(employeeManager.update(employeeMapper.transformToEntity(request))));
+        ru.bogdanov.diplom.data.model.Employee employee = employeeMapper.transformToEntity(request);
+        employee.setId(UUID.fromString(request.getId()));
+        responseObserver.onNext(employeeMapper.transform(employeeManager.update(employee)));
         responseObserver.onCompleted();
     }
 
@@ -85,11 +89,13 @@ public class GrpcEmployeeService extends EmployeeServiceGrpc.EmployeeServiceImpl
         responseObserver.onNext(CountEmployeesResponse.newBuilder().setCount(result).build());
         responseObserver.onCompleted();
     }
-/*
+
     @Override
-    public void approveSign(ApproveSignDocuments request, StreamObserver<Empty> responseObserver) {
-        employeeManager.approveSign(request);
+    public void activateEmployee(ActivateRequest request, StreamObserver<Empty> responseObserver) {
+        ru.bogdanov.diplom.data.model.Employee employee = employeeService.findOne(UUID.fromString(request.getEmployeeId()));
+        employee.setStatus(EmployeeStatus.ENABLED_EMPLOYEE);
+        employeeService.save(employee);
         responseObserver.onNext(Empty.getDefaultInstance());
         responseObserver.onCompleted();
-    }*/
+    }
 }

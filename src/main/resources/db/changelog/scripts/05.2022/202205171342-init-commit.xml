@@ -23,5 +23,11 @@
         <sqlFile path="sql/data.sql"
                  relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet id="202205171322" author="SBogdanov" failOnError="true"
+               logicalFilePath="db/changelog/scripts/05.2022/liquibase_index.xml">
+        <comment>init commit</comment>
+        <sqlFile path="sql/202205271202-add-contact-table.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>

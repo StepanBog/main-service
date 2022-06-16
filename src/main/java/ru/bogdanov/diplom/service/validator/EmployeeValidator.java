@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Валидатор для работника
  *
- * @author VKozlov
+ * @author SBogdanov
  */
 @Component
 @RequiredArgsConstructor

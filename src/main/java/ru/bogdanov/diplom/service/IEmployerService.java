@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * @author VKozlov
+ * @author SBogdanov
  * Сервис для работы с работодателем
  */
 public interface IEmployerService {
