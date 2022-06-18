@@ -3,7 +3,8 @@ package ru.bogdanov.diplom.data.model;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

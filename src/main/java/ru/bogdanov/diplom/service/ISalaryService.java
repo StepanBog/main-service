@@ -3,7 +3,6 @@ package ru.bogdanov.diplom.service;
 import ru.bogdanov.diplom.data.model.Salary;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.UUID;
 
 /**

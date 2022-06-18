@@ -1,6 +1,5 @@
 package ru.bogdanov.diplom.service.validator.transaction;
 
-import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ru.bogdanov.diplom.data.enums.errors.TransactionError;

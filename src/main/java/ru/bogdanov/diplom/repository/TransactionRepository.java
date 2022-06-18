@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import ru.bogdanov.diplom.data.model.Transaction;
 import ru.bogdanov.diplom.grpc.generated.TransactionStatus;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

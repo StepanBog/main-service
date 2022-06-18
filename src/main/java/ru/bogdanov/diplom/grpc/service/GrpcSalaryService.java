@@ -14,7 +14,6 @@ import ru.bogdanov.diplom.mapper.SalaryMapper;
 import ru.bogdanov.diplom.service.ISalaryService;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author SBogdanov

@@ -8,8 +8,6 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.data.domain.Page;
 import ru.bogdanov.diplom.grpc.generated.ApproveRequest;
 import ru.bogdanov.diplom.grpc.generated.DeclineRequest;
-import ru.bogdanov.diplom.grpc.generated.Transaction;
-import ru.bogdanov.diplom.grpc.generated.TransactionStatus;
 import ru.bogdanov.diplom.grpc.generated.service.transaction.*;
 import ru.bogdanov.diplom.manager.IPaymentTransactionManager;
 import ru.bogdanov.diplom.mapper.TransactionMapper;

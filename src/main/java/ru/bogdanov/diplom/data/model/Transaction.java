@@ -2,9 +2,8 @@ package ru.bogdanov.diplom.data.model;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import ru.bogdanov.diplom.grpc.generated.ApproveStatus;
 import ru.bogdanov.diplom.grpc.generated.TransactionStatus;
-import ru.bogdanov.diplom.grpc.generated.common.ApproveStatus;
-import ru.bogdanov.diplom.grpc.generated.common.ErrorCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
