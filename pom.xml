@@ -26,6 +26,8 @@
         <starter-grpc.version>2.13.1.RELEASE</starter-grpc.version>
         <grpc.version>1.42.2</grpc.version>
         <jsoup.version>1.14.3</jsoup.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -136,6 +138,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>

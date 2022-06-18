@@ -15,7 +15,7 @@ spring:
       connection-test-query: SELECT 1
     driverClassName: org.postgresql.Driver
     name: postgres-datasource
-    url: jdbc:postgresql://localhost:5432/main-service?autoReconnect=true
+    url: jdbc:postgresql://localhost:5432/main-service?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
     username: postgres
     password: root
 
