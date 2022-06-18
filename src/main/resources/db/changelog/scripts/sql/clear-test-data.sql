@@ -1,8 +1,0 @@
-TRUNCATE service_stop_interval CASCADE;
-TRUNCATE employee_hold_sum CASCADE;
-TRUNCATE salary CASCADE;
-TRUNCATE position CASCADE;
-TRUNCATE payment CASCADE;
-TRUNCATE transaction CASCADE;
-TRUNCATE employee CASCADE;
-DELETE FROM requisites WHERE id != '7a5de388-19e0-474f-8865-17c47701366a';

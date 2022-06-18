@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @GrpcAdvice
 public class GrpcExceptionAdvice {
 
-    @Value(value = "${spring.application.name:odp-service}")
+    @Value(value = "${spring.application.name:main-service}")
     private String applicationName;
 
     @GrpcExceptionHandler(ServiceException.class)
